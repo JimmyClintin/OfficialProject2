@@ -25,11 +25,13 @@
         android:id="@+id/button"
         android:layout_width="253dp"
         android:layout_height="49dp"
-        android:text="меню"
+        android:text="@string/RandomMe"
+        android:onClick="randomMe"
         app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="OnClick" />
 
     <Button
         android:id="@+id/button2"

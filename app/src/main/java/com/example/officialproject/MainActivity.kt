@@ -11,7 +11,21 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
     }
+    fun randomMe(view: View) {
+
+        // Create an Intent to start the second activity
+        val randomIntent = Intent(this, SecondActivity::class.java)
+
+        // Start the new activity.
+        startActivity(randomIntent)
+    }
+
+
+
 }
+
 
 
