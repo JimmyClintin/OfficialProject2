@@ -3,25 +3,26 @@ package com.example.schoolscientistsexample
 import android.util.Log
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class ServerCommand{
 
     private val client = HttpClient()
 
-    fun ledOn() {
-        GlobalScope.launch(Dispatchers.IO) {
-            val data = client.get<String>("https://ms0.newtonbox.ru/set/house/device1/led/on")
-            Log.i("https://ms1.newtonbox.ru/terminal0/1 Simple case ", data)
+    private suspend fun createOrderBody(item: Int): String{
+        try{
+            var query = "https://ms1.newtonbox.ru/terminal0/" + item
+            val res = client.get<String>(query)
+            Log.i(query + " Simple case ", res)
+            return res
+        }
+        catch (th : Throwable) {
+            return "ошибка"
         }
     }
 
-    fun ledOff() {
-        GlobalScope.launch(Dispatchers.IO) {
-            val data = client.get<String>("https://ms0.newtonbox.ru/set/house/device1/led/off")
-            Log.i("https://ms1.newtonbox.ru/terminal0/2 Simple case ", data)
-        }
+    // пример для Андрея Губанова
+    fun createOrder(item: Int): String{
+        return runBlocking { createOrderBody(item) }
     }
 }

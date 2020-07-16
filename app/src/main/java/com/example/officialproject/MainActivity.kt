@@ -16,9 +16,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
+// perehod mezdu ekranami
     }
-    fun randomMe(view: View) {
+
+    fun randomMe(view: View) {  // метод для перехода через активити
 
         // Create an Intent to start the second activity
         val randomIntent = Intent(this, SecondActivity::class.java)

@@ -12,22 +12,27 @@ class SecondActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
     }
-    var t = ServerCommand()
 
-    fun ledOn(view: View){
-        t.ledOn()
+    // это все переходы к активити
+    fun tea(view: View) {
         val randomIntent = Intent(this, ThirdActivity::class.java)
 
         // Start the new activity.
         startActivity(randomIntent)
     }
 
-    fun ledOff(view: View){
-        t.ledOff()
-        val randomIntent = Intent(this, ThirdActivity::class.java)
+    fun banana(view: View) {
+        val randomIntent = Intent(this, FourthActivity::class.java)
 
         // Start the new activity.
         startActivity(randomIntent)
     }
 
+    fun pizza(view: View) {
+        val randomIntent = Intent(this, FifthActivity::class.java)
+
+        // Start the new activity.
+        startActivity(randomIntent)
+
+    }
 }
