@@ -1,6 +1,8 @@
 package com.example.schoolscientistsexample
 
 import android.util.Log
+import com.example.officialproject.FoodList
+
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import kotlinx.coroutines.runBlocking
@@ -25,4 +27,10 @@ class ServerCommand{
     fun createOrder(item: Int): String{
         return runBlocking { createOrderBody(item) }
     }
+
+   /* suspend fun getFoodList(): FoodList{
+        val query = "https://ms1.newtonbox.ru/phone/list/"
+        val response = client.get<String>(query)
+        return FoodList(null, nullm bykkm byk)
+    }*/
 }
