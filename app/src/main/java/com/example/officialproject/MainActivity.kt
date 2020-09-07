@@ -7,6 +7,8 @@ import android.view.View
 import android.util.Log
 import androidx.core.content.ContextCompat.startActivity
 import com.example.schoolscientistsexample.ServerCommand
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.lang.NumberFormatException
 
 class MainActivity : AppCompatActivity() {
@@ -16,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-// perehod mezdu ekranami
+        // perehod mezdu ekranami
     }
 
     fun randomMe(view: View) {  // метод для перехода через активити

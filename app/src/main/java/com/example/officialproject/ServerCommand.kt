@@ -1,36 +1,43 @@
 package com.example.schoolscientistsexample
 
 import android.util.Log
-import com.example.officialproject.FoodList
+import com.example.officialproject.*
+import com.google.gson.Gson
 
-import io.ktor.client.HttpClient
-import io.ktor.client.request.get
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
-class ServerCommand{
+class ServerCommand {
+    val interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 
-    private val client = HttpClient()
+    val okClient =
+        OkHttpClient.Builder().addInterceptor(interceptor).retryOnConnectionFailure(true).build()
+    val retrofit = Retrofit.Builder().baseUrl("https://ms1.newtonbox.ru/")
+        .addConverterFactory(GsonConverterFactory.create()).client(okClient).build()
 
-    private suspend fun createOrderBody(item: Int): String{
-        try{
-            var query = "https://ms1.newtonbox.ru/terminal0/" + item
-            val res = client.get<String>(query)
-            Log.i(query + " Simple case ", res)
-            return res
-        }
-        catch (th : Throwable) {
-            return "ошибка"
-        }
-    }
+// {"name":"Andrey", "last_name":"Gubanov"} class name = "andrey" last_name= (это просто пример)
+
 
     // пример для Андрея Губанова
-    fun createOrder(item: Int): String{
-        return runBlocking { createOrderBody(item) }
+    /* fun createOrder(item: Int): String{
+         return runBlocking { createOrderBody(item) }
+     } */
+    suspend fun getFoodList(): FoodList { // Выгрузка меню
+        val foodService = retrofit.create(FoodService::class.java)
+        return foodService.getFoodList()
     }
 
-   /* suspend fun getFoodList(): FoodList{
-        val query = "https://ms1.newtonbox.ru/phone/list/"
-        val response = client.get<String>(query)
-        return FoodList(null, nullm bykkm byk)
-    }*/
+    suspend fun makeOrder(foods: Order): String { //отправка заказа
+        val foodService = retrofit.create(FoodService::class.java)
+        val hashFoods = HashMap<String, String>()
+        hashFoods.put("order", Gson().toJson(foods.order))
+        val a = foodService.makeOrder(hashFoods)
+        return a
+
+    }
 }
